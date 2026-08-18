@@ -1,0 +1,116 @@
+﻿@model ArtGallery.Models.Category
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Edit Category";
+}
+
+<div class="form-page">
+
+    <div class="container py-5">
+
+        <div class="form-card">
+
+            <!-- Header -->
+
+            <div class="form-header">
+
+                <h2>
+                    <i class="bi bi-pencil-square"></i>
+                    Edit Category
+                </h2>
+
+                <p>
+                    Update the category information below.
+                </p>
+
+            </div>
+
+            <!-- Body -->
+
+            <div class="form-body">
+
+                <form asp-action="Edit" method="post">
+
+                    <input asp-for="CategoryId" type="hidden" />
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-3">
+                    </div>
+
+                    <!-- Category Name -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="CategoryName"
+                               class="form-label">
+                        </label>
+
+                        <input asp-for="CategoryName"
+                               class="form-control"
+                               placeholder="Enter category name" />
+
+                        <span asp-validation-for="CategoryName"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <!-- Description -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="Description"
+                               class="form-label">
+                        </label>
+
+                        <textarea asp-for="Description"
+                                  rows="5"
+                                  class="form-control"
+                                  placeholder="Enter category description"></textarea>
+
+                        <span asp-validation-for="Description"
+                              class="text-danger">
+                        </span>
+
+                    </div>
+
+                    <!-- Buttons -->
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-action="Index"
+                           class="btn btn-light">
+
+                            <i class="bi bi-arrow-left-circle"></i>
+
+                            Cancel
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-dashboard-action">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Save Changes
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+

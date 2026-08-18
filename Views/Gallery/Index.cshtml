@@ -1,0 +1,176 @@
+﻿@model IEnumerable<ArtGallery.Models.ArtWork>
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Artwork Gallery";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+
+                Explore Our Art Gallery
+
+            </h1>
+
+            <p>
+
+                Discover unique artworks from talented artists.
+
+            </p>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="login-card mb-5">
+
+            <form asp-action="Index" method="get">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           name="searchString"
+                           class="form-control"
+                           placeholder="Search artwork or artist..." />
+
+                    <button type="submit"
+                            class="btn btn-dark">
+
+                        <i class="bi bi-search"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="login-card h-100 p-0 overflow-hidden">
+
+                            <!-- Artwork Image -->
+
+                            <img src="@item.ImageURL"
+                                 class="img-fluid w-100 art-image"
+                                 alt="@item.Title" />
+
+                            <div class="p-4">
+
+                                <h3 class="mb-2">
+
+                                    @item.Title
+
+                                </h3>
+
+                                <p class="mb-2">
+
+                                    <i class="bi bi-person-fill"></i>
+
+                                    @item.ArtistName
+
+                                </p>
+
+                                <p class="mb-2">
+
+                                    <span class="badge bg-secondary">
+
+                                        @item.Category?.CategoryName
+
+                                    </span>
+
+                                </p>
+
+                                <h4 class="text-success mb-3">
+
+                                    R @item.Price
+
+                                </h4>
+
+                                <hr />
+
+                                <div class="d-grid gap-2 mt-3">
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.ArtId"
+                                       class="btn btn-dark">
+
+                                        <i class="bi bi-eye-fill"></i>
+
+                                        View Details
+
+                                    </a>
+
+                                    <a asp-controller="Favourite"
+                                       asp-action="Add"
+                                       asp-route-id="@item.ArtId"
+                                       class="btn btn-outline-danger">
+
+                                        <i class="bi bi-heart-fill"></i>
+
+                                        Add Favourite
+
+                                    </a>
+
+                                    <a asp-controller="Cart"
+                                       asp-action="Add"
+                                       asp-route-id="@item.ArtId"
+                                       class="btn btn-success">
+
+                                        <i class="bi bi-cart-plus-fill"></i>
+
+                                        Add To Cart
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="login-card text-center">
+
+                <i class="bi bi-image display-1 text-primary"></i>
+
+                <h2 class="mt-4">
+
+                    No Artworks Available
+
+                </h2>
+
+                <p>
+
+                    Check again later for new artworks.
+
+                </p>
+
+            </div>
+        }
+
+    </div>
+
+</section>

@@ -1,0 +1,189 @@
+﻿@model ArtGallery.Models.ContactMessage
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Message Details";
+}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="dashboard-header text-center mb-5">
+
+            <h1>
+
+                <i class="bi bi-envelope-open-fill"></i>
+
+                Message Details
+
+            </h1>
+
+            <p>
+
+                View complete information about this customer message.
+
+            </p>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="login-card">
+
+                    <div class="text-center mb-4">
+
+                        <i class="bi bi-envelope-fill text-primary"
+                           style="font-size:90px;"></i>
+
+                    </div>
+
+                    <table class="table details-table align-middle">
+
+                        <tbody>
+
+                            <tr>
+
+                                <th width="220">
+
+                                    <i class="bi bi-person-fill"></i>
+
+                                    Customer
+
+                                </th>
+
+                                <td>
+
+                                    @(Model.Customer?.FullName ?? "Unknown Customer")
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <th>
+
+                                    <i class="bi bi-envelope-fill"></i>
+
+                                    Email
+
+                                </th>
+
+                                <td>
+
+                                    @(Model.Customer?.Email ?? "-")
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <th>
+
+                                    <i class="bi bi-chat-left-text-fill"></i>
+
+                                    Subject
+
+                                </th>
+
+                                <td>
+
+                                    @Model.Subject
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <th>
+
+                                    <i class="bi bi-calendar-event-fill"></i>
+
+                                    Date Sent
+
+                                </th>
+
+                                <td>
+
+                                    @Model.DateSent.ToString("dd MMMM yyyy HH:mm")
+
+                                </td>
+
+                            </tr>
+
+                            <tr>
+
+                                <th>
+
+                                    <i class="bi bi-card-text"></i>
+
+                                    Message
+
+                                </th>
+
+                                <td>
+
+                                    @Model.Message
+
+                                </td>
+
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-5">
+
+                        <a asp-action="AdminIndex"
+                           class="btn btn-dashboard-action">
+
+                            <i class="bi bi-arrow-left-circle"></i>
+
+                            Back to Messages
+
+                        </a>
+
+                        <div>
+
+                            <a asp-action="Reply"
+                               asp-route-id="@Model.ContactMessageId"
+                               class="btn btn-dashboard-action me-2">
+
+                                <i class="bi bi-reply-fill"></i>
+
+                                Reply
+
+                            </a>
+
+                            <a asp-action="Delete"
+                               asp-route-id="@Model.ContactMessageId"
+                               class="btn btn-danger"
+                               onclick="return confirm('Delete this message?');">
+
+                                <i class="bi bi-trash-fill"></i>
+
+                                Delete
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

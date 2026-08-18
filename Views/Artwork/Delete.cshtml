@@ -1,0 +1,190 @@
+﻿@model ArtGallery.Models.ArtWork
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Delete Artwork";
+}
+
+<div class="form-page">
+
+    <div class="container py-5">
+
+        <div class="form-card">
+
+            <!-- Header -->
+
+            <div class="form-header text-center">
+
+                <h2>
+                    <i class="bi bi-trash-fill"></i>
+                    Delete Artwork
+                </h2>
+
+                <p>
+                    Review the artwork details before permanently deleting it.
+                </p>
+
+            </div>
+
+            <!-- Body -->
+
+            <div class="form-body">
+
+                <div class="alert alert-danger text-center rounded-4 shadow-sm mb-5">
+
+                    <i class="bi bi-exclamation-triangle-fill fs-4"></i>
+
+                    <h5 class="mt-2 mb-1">
+                        Warning!
+                    </h5>
+
+                    <p class="mb-0">
+                        This action cannot be undone.
+                    </p>
+
+                </div>
+
+                <div class="row align-items-center g-5">
+
+                    <!-- Artwork Image -->
+
+                    <div class="col-lg-4 text-center">
+
+                        <img src="@Model.ImageURL"
+                             class="details-image img-fluid rounded-4 shadow"
+                             alt="@Model.Title" />
+
+                    </div>
+
+                    <!-- Artwork Information -->
+
+                    <div class="col-lg-8">
+
+                        <table class="table details-table align-middle">
+
+                            <tbody>
+
+                                <tr>
+
+                                    <th>
+                                        <i class="bi bi-brush"></i>
+                                        Title
+                                    </th>
+
+                                    <td>
+                                        @Model.Title
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>
+                                        <i class="bi bi-person-fill"></i>
+                                        Artist
+                                    </th>
+
+                                    <td>
+                                        @Model.ArtistName
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>
+                                        <i class="bi bi-currency-dollar"></i>
+                                        Price
+                                    </th>
+
+                                    <td>
+                                        R @Model.Price
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>
+                                        <i class="bi bi-card-text"></i>
+                                        Description
+                                    </th>
+
+                                    <td>
+                                        @Model.Description
+                                    </td>
+
+                                </tr>
+
+                                <tr>
+
+                                    <th>
+                                        <i class="bi bi-check-circle-fill"></i>
+                                        Status
+                                    </th>
+
+                                    <td>
+
+                                        @if (Model.Status)
+                                        {
+                                            <span class="badge bg-success px-3 py-2">
+                                                Available
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge bg-danger px-3 py-2">
+                                                Sold
+                                            </span>
+                                        }
+
+                                    </td>
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <!-- Buttons -->
+
+                <form asp-action="Delete" method="post" class="mt-5">
+
+                    <input type="hidden" asp-for="ArtId" />
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                        <a asp-action="Index"
+                           class="btn btn-dashboard-action">
+
+                            <i class="bi bi-arrow-left-circle"></i>
+
+                            Cancel
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-danger px-4 py-2 rounded-pill">
+
+                            <i class="bi bi-trash-fill"></i>
+
+                            Delete Artwork
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

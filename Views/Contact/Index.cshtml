@@ -1,0 +1,133 @@
+﻿@model ArtGallery.Models.ContactMessage
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Contact Us";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+
+                Contact Us
+
+            </h1>
+
+            <p>
+
+                We'd love to hear from you. Send us your questions, feedback or enquiries.
+
+            </p>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="login-card">
+
+                    @if (TempData["Success"] != null)
+                    {
+                        <div class="alert alert-success">
+
+                            @TempData["Success"]
+
+                        </div>
+                    }
+
+                    <form asp-controller="Contact"
+                          asp-action="Send"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <div asp-validation-summary="All"
+                             class="text-danger mb-4">
+                        </div>
+
+                        <!-- Subject -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Subject"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Subject"
+                                   class="form-control"
+                                   placeholder="Enter message subject" />
+
+                            <span asp-validation-for="Subject"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Message -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Message"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <textarea asp-for="Message"
+                                      rows="6"
+                                      class="form-control"
+                                      placeholder="Type your message here...">
+                            </textarea>
+
+                            <span asp-validation-for="Message"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Buttons -->
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+
+                            <a asp-controller="Customer"
+                               asp-action="Dashboard"
+                               class="btn btn-dark">
+
+                                <i class="bi bi-arrow-left-circle"></i>
+
+                                Back
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-dark">
+
+                                <i class="bi bi-send-fill"></i>
+
+                                Send Message
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

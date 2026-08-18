@@ -1,0 +1,146 @@
+﻿@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Dashboard";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Welcome, @Context.Session.GetString("CustomerName")
+            </h1>
+
+            <p>
+                Discover beautiful artworks and manage your account.
+            </p>
+
+        </div>
+
+        <!-- Statistics -->
+
+        <div class="row g-4 mb-5">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-images display-4 text-primary mb-3"></i>
+
+                    <h4>Browse Gallery</h4>
+
+                    <h2>
+                        <i class="bi bi-arrow-right-circle"></i>
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-heart-fill display-4 text-danger mb-3"></i>
+
+                    <h4>My Favourites</h4>
+
+                    <h2>@(ViewBag.Favourites ?? 0)</h2>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-cart-fill display-4 text-primary mb-3"></i>
+
+                    <h4>Shopping Cart</h4>
+
+                    <h2>@(ViewBag.CartItems ?? 0)</h2>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-bag-check-fill display-4 text-success mb-3"></i>
+
+                    <h4>Purchased</h4>
+
+                    <h2>@(ViewBag.Purchases ?? 0)</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+
+        <div class="login-card">
+
+            <h2 class="text-center mb-4">
+                Quick Actions
+            </h2>
+
+            <div class="row g-4">
+
+                <div class="col-md-4">
+                    <a asp-controller="Gallery" asp-action="Index" class="btn btn-dark w-100 py-3">
+                        <i class="bi bi-images"></i>
+                        Browse Artworks
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a asp-controller="Favourite" asp-action="Index" class="btn btn-dark w-100 py-3">
+                        <i class="bi bi-heart-fill"></i>
+                        My Favourites
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a asp-controller="Cart" asp-action="Index" class="btn btn-dark w-100 py-3">
+                        <i class="bi bi-cart-fill"></i>
+                        Shopping Cart
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a asp-controller="Order" asp-action="Index" class="btn btn-dark w-100 py-3">
+                        <i class="bi bi-credit-card-fill"></i>
+                        Purchase History
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a asp-controller="Contact" asp-action="MyMessages" class="btn btn-dark w-100 py-3">
+                        <i class="bi bi-chat-left-text-fill"></i>
+                        My Messages
+                    </a>
+                </div>
+
+                <div class="col-md-4">
+                    <a asp-controller="Customer" asp-action="Profile" class="btn btn-dark w-100 py-3">
+                        <i class="bi bi-person-circle"></i>
+                        My Profile
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

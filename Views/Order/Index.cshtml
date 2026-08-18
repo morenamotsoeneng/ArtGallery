@@ -1,0 +1,184 @@
+﻿@model IEnumerable<ArtGallery.Models.Order>
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Purchase History";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Purchase History
+            </h1>
+
+            <p>
+                View all of your previous artwork purchases.
+            </p>
+
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var order in Model)
+                {
+                    <div class="col-lg-6">
+
+                        <div class="login-card h-100">
+
+                            <!-- Order Header -->
+
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+
+                                <h3 class="mb-0">
+
+                                    <i class="bi bi-receipt-cutoff text-primary"></i>
+
+                                    Order #@order.OrderId
+
+                                </h3>
+
+                                <small class="text-muted">
+
+                                    @order.OrderDate.ToString("dd MMM yyyy")
+
+                                </small>
+
+                            </div>
+
+                            <table class="table align-middle">
+
+                                <thead class="table-dark">
+
+                                    <tr>
+
+                                        <th>
+                                            Artwork
+                                        </th>
+
+                                        <th class="text-end">
+                                            Price
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var item in order.OrderItems!)
+                                    {
+                                        <tr>
+
+                                            <td>
+
+                                                @item.ArtWork?.Title
+
+                                            </td>
+
+                                            <td class="text-end">
+
+                                                R @item.Price
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                            </table>
+
+                            <hr />
+
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <div>
+
+                                    <strong>Status</strong>
+
+                                    <br />
+
+                                    @if (order.Status == "Completed")
+                                    {
+                                        <span class="badge bg-success">
+                                            @order.Status
+                                        </span>
+                                    }
+                                    else if (order.Status == "Pending")
+                                    {
+                                        <span class="badge bg-warning text-dark">
+                                            @order.Status
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">
+                                            @order.Status
+                                        </span>
+                                    }
+
+                                </div>
+
+                                <div class="text-end">
+
+                                    <strong>Total</strong>
+
+                                    <h4 class="mb-0">
+
+                                        R @order.TotalAmount
+
+                                    </h4>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="login-card text-center">
+
+                <i class="bi bi-bag-x display-1 text-primary"></i>
+
+                <h2 class="mt-4">
+
+                    No Purchases Yet
+
+                </h2>
+
+                <p>
+
+                    Buy your first artwork to see your purchase history here.
+
+                </p>
+
+                <a asp-controller="Gallery"
+                   asp-action="Index"
+                   class="btn btn-dark mt-3">
+
+                    <i class="bi bi-images"></i>
+
+                    Browse Gallery
+
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+</section>

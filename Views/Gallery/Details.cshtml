@@ -1,0 +1,211 @@
+﻿@model ArtGallery.Models.ArtWork
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Artwork Details";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Artwork Details
+            </h1>
+
+            <p>
+                View complete information about this artwork.
+            </p>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-10">
+
+                <div class="login-card">
+
+                    <div class="row align-items-center g-5">
+
+                        <!-- Artwork Image -->
+
+                        <div class="col-lg-5 text-center">
+
+                            <img src="@Model.ImageURL"
+                                 class="img-fluid rounded-4 shadow art-image"
+                                 alt="@Model.Title"
+                                 style="max-height:500px; object-fit:cover;" />
+
+                        </div>
+
+                        <!-- Artwork Details -->
+
+                        <div class="col-lg-7">
+
+                            <table class="table details-table align-middle">
+
+                                <tbody>
+
+                                    <tr>
+
+                                        <th>
+                                            <i class="bi bi-brush"></i>
+                                            Title
+                                        </th>
+
+                                        <td>
+                                            @Model.Title
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <th>
+                                            <i class="bi bi-person-fill"></i>
+                                            Artist
+                                        </th>
+
+                                        <td>
+                                            @Model.ArtistName
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <th>
+                                            <i class="bi bi-folder-fill"></i>
+                                            Category
+                                        </th>
+
+                                        <td>
+                                            @Model.Category?.CategoryName
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <th>
+                                            <i class="bi bi-currency-dollar"></i>
+                                            Price
+                                        </th>
+
+                                        <td class="fw-bold text-success">
+                                            R @Model.Price
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <th>
+                                            <i class="bi bi-card-text"></i>
+                                            Description
+                                        </th>
+
+                                        <td>
+                                            @Model.Description
+                                        </td>
+
+                                    </tr>
+
+                                    <tr>
+
+                                        <th>
+                                            <i class="bi bi-check-circle-fill"></i>
+                                            Status
+                                        </th>
+
+                                        <td>
+
+                                            @if (Model.Status)
+                                            {
+                                                <span class="badge bg-success px-3 py-2">
+                                                    Available
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger px-3 py-2">
+                                                    Sold
+                                                </span>
+                                            }
+
+                                        </td>
+
+                                    </tr>
+
+                                </tbody>
+
+                            </table>
+
+                            <!-- Buttons -->
+
+                            <div class="d-grid gap-3 mt-5">
+
+                                @if (Model.Status)
+                                {
+                                    <a asp-controller="Cart"
+                                       asp-action="Add"
+                                       asp-route-id="@Model.ArtId"
+                                       class="btn btn-dark">
+
+                                        <i class="bi bi-cart-plus-fill"></i>
+
+                                        Add to Cart
+
+                                    </a>
+                                }
+                                else
+                                {
+                                    <button class="btn btn-secondary" disabled>
+
+                                        <i class="bi bi-x-circle-fill"></i>
+
+                                        Sold Out
+
+                                    </button>
+                                }
+
+                                <a asp-controller="Favourite"
+                                   asp-action="Add"
+                                   asp-route-id="@Model.ArtId"
+                                   class="btn btn-danger">
+
+                                    <i class="bi bi-heart-fill"></i>
+
+                                    Add to Favourite
+
+                                </a>
+
+                                <a asp-controller="Gallery"
+                                   asp-action="Index"
+                                   class="btn btn-dark">
+
+                                    <i class="bi bi-arrow-left-circle"></i>
+
+                                    Back to Gallery
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

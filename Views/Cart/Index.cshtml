@@ -1,0 +1,263 @@
+﻿@model IEnumerable<ArtGallery.Models.CartItem>
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Shopping Cart";
+}
+
+
+<div class="container py-5">
+
+
+    <div class="mb-4">
+
+        <h2 class="fw-bold">
+
+            <i class="bi bi-cart-fill"></i>
+
+            My Shopping Cart
+
+        </h2>
+
+
+        <p class="text-muted">
+            Review your selected artworks before checkout.
+        </p>
+
+
+    </div>
+
+
+
+
+    @if (Model != null && Model.Any())
+    {
+
+        <div class="row g-4">
+
+
+            @foreach (var item in Model)
+            {
+
+                var artwork = item.ArtWork;
+
+
+                @if (artwork != null)
+                {
+
+                    <div class="col-lg-4 col-md-6">
+
+
+                        <div class="card shadow-sm border-0 rounded-4 h-100">
+
+
+
+                            <!-- Artwork Image -->
+
+                            <img src="@artwork.ImageURL"
+                                 class="card-img-top rounded-top-4"
+                                 style="height:260px; object-fit:cover;"
+                                 alt="@artwork.Title" />
+
+
+
+
+                            <div class="card-body">
+
+
+                                <h5 class="fw-bold">
+
+                                    @artwork.Title
+
+                                </h5>
+
+
+
+                                <p class="text-muted mb-2">
+
+                                    <i class="bi bi-person"></i>
+
+                                    @artwork.ArtistName
+
+                                </p>
+
+
+
+
+                                <span class="badge bg-secondary">
+
+                                    @(artwork.Category != null
+                                        ? artwork.Category.CategoryName
+                                        : "No Category")
+
+                                </span>
+
+
+
+
+
+                                <h4 class="text-success mt-3">
+
+                                    R @artwork.Price
+
+                                </h4>
+
+
+                            </div>
+
+
+
+
+
+                            <div class="card-footer bg-white border-0">
+
+
+                                <a asp-action="Remove"
+                                   asp-route-id="@item.CartItemId"
+                                   class="btn btn-outline-danger w-100">
+
+
+                                    <i class="bi bi-trash"></i>
+
+                                    Remove From Cart
+
+
+                                </a>
+
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                }
+
+            }
+
+
+        </div>
+
+
+
+
+
+        <!-- Cart Summary -->
+
+
+        <div class="card shadow-sm border-0 rounded-4 mt-5">
+
+
+            <div class="card-body">
+
+
+                <div class="d-flex justify-content-between align-items-center">
+
+
+                    <h3>
+
+                        Total
+
+                    </h3>
+
+
+
+                    <h3 class="text-success">
+
+
+                        R @(Model
+                          .Where(x => x.ArtWork != null)
+                          .Sum(x => x.ArtWork.Price))
+
+
+                    </h3>
+
+
+                </div>
+
+
+
+                <hr />
+
+
+
+                <div class="text-end">
+
+
+                    <a asp-controller="Checkout"
+                       asp-action="Index"
+                       class="btn btn-success btn-lg">
+
+
+                        <i class="bi bi-credit-card"></i>
+
+                        Proceed To Checkout
+
+
+                    </a>
+
+
+                </div>
+
+
+
+            </div>
+
+
+        </div>
+
+
+
+    }
+
+    else
+    {
+
+
+        <div class="alert alert-info text-center p-5">
+
+
+            <i class="bi bi-cart-x fs-1"></i>
+
+
+
+            <h4 class="mt-3">
+
+                Your cart is empty
+
+            </h4>
+
+
+
+            <p>
+
+                Browse artworks and add your favourite pieces.
+
+            </p>
+
+
+
+
+            <a asp-controller="Gallery"
+               asp-action="Index"
+               class="btn btn-dark">
+
+
+                Browse Gallery
+
+
+            </a>
+
+
+
+        </div>
+
+
+    }
+
+
+
+</div>

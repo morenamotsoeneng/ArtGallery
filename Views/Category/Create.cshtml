@@ -1,0 +1,115 @@
+﻿@model ArtGallery.Models.Category
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add New Category";
+}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="dashboard-header text-center mb-5">
+
+            <h1>
+                Add New Category
+            </h1>
+
+            <p>
+                Create a new category to organize your artworks.
+            </p>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="login-card">
+
+                    <form asp-action="Create"
+                          method="post">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-4">
+                        </div>
+
+                        <!-- Category Name -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="CategoryName"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="CategoryName"
+                                   class="form-control"
+                                   placeholder="Enter category name" />
+
+                            <span asp-validation-for="CategoryName"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Description -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Description"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <textarea asp-for="Description"
+                                      rows="5"
+                                      class="form-control"
+                                      placeholder="Enter category description"></textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Buttons -->
+
+                        <div class="d-flex justify-content-between align-items-center mt-4">
+
+                            <a asp-action="Index"
+                               class="btn btn-dashboard-action">
+
+                                <i class="bi bi-arrow-left-circle"></i>
+
+                                Back
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-dashboard-action">
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Save Category
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

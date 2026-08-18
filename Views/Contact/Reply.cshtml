@@ -1,0 +1,172 @@
+﻿@model ArtGallery.ViewModels.ReplyMessageViewModel
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Reply to Customer";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+
+                Reply to Customer
+
+            </h1>
+
+            <p>
+
+                Respond to the customer's message below.
+
+            </p>
+
+        </div>
+
+        @if (TempData["Error"] != null)
+        {
+            <div class="alert alert-danger mb-4">
+
+                @TempData["Error"]
+
+            </div>
+        }
+
+        @if (TempData["Success"] != null)
+        {
+            <div class="alert alert-success mb-4">
+
+                @TempData["Success"]
+
+            </div>
+        }
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <div class="login-card">
+
+                    <form asp-controller="Contact"
+                          asp-action="Reply"
+                          method="post">
+
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden"
+                               asp-for="ContactMessageId" />
+
+                        <!-- Customer -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Customer
+
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   value="@Model.CustomerName"
+                                   readonly />
+
+                        </div>
+
+                        <!-- Subject -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Subject
+
+                            </label>
+
+                            <input type="text"
+                                   class="form-control"
+                                   value="@Model.Subject"
+                                   readonly />
+
+                        </div>
+
+                        <!-- Original Message -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Customer Message
+
+                            </label>
+
+                            <textarea class="form-control"
+                                      rows="6"
+                                      readonly>@Model.Message</textarea>
+
+                        </div>
+
+                        <!-- Reply -->
+
+                        <div class="mb-4">
+
+                            <label class="form-label fw-semibold">
+
+                                Your Reply
+
+                            </label>
+
+                            <textarea asp-for="AdminReply"
+                                      class="form-control"
+                                      rows="6"
+                                      placeholder="Type your reply here..."></textarea>
+
+                            <span asp-validation-for="AdminReply"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <!-- Buttons -->
+
+                        <div class="d-flex justify-content-between mt-4">
+
+                            <a asp-action="AdminIndex"
+                               class="btn btn-dark">
+
+                                <i class="bi bi-arrow-left-circle"></i>
+
+                                Back
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-dark">
+
+                                <i class="bi bi-send-fill"></i>
+
+                                Send Reply
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,172 @@
+﻿@model IEnumerable<ArtGallery.Models.ContactMessage>
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "My Messages";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+
+                My Messages
+
+            </h1>
+
+            <p>
+
+                View your conversations with the gallery.
+
+            </p>
+
+        </div>
+
+        <!-- New Message Button -->
+
+        <div class="login-card mb-5">
+
+            <div class="d-flex justify-content-end">
+
+                <a asp-action="Index"
+                   class="btn btn-dark">
+
+                    <i class="bi bi-plus-circle-fill"></i>
+
+                    New Message
+
+                </a>
+
+            </div>
+
+        </div>
+
+        @if (Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-6">
+
+                        <div class="login-card h-100">
+
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+
+                                <h3 class="mb-0">
+
+                                    @item.Subject
+
+                                </h3>
+
+                                @if (item.IsReplied)
+                                {
+                                    <span class="badge bg-success">
+
+                                        Replied
+
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-warning text-dark">
+
+                                        Pending
+
+                                    </span>
+                                }
+
+                            </div>
+
+                            <hr />
+
+                            <h5>
+
+                                <i class="bi bi-chat-left-text-fill"></i>
+
+                                Your Message
+
+                            </h5>
+
+                            <p>
+
+                                @item.Message
+
+                            </p>
+
+                            <small class="text-muted">
+
+                                Sent on @item.DateSent.ToString("dd MMM yyyy HH:mm")
+
+                            </small>
+
+                            @if (item.IsReplied)
+                            {
+                                <hr />
+
+                                <h5 class="text-success">
+
+                                    <i class="bi bi-reply-fill"></i>
+
+                                    Gallery Reply
+
+                                </h5>
+
+                                <p>
+
+                                    @item.AdminReply
+
+                                </p>
+
+                                <small class="text-muted">
+
+                                    Replied on @item.ReplyDate?.ToString("dd MMM yyyy HH:mm")
+
+                                </small>
+                            }
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="login-card text-center">
+
+                <i class="bi bi-chat-left-text display-1 text-primary"></i>
+
+                <h2 class="mt-4">
+
+                    No Messages Yet
+
+                </h2>
+
+                <p>
+
+                    You haven't contacted the gallery yet.
+
+                </p>
+
+                <a asp-action="Index"
+                   class="btn btn-dark mt-3">
+
+                    <i class="bi bi-envelope-fill"></i>
+
+                    Contact Us
+
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+</section>

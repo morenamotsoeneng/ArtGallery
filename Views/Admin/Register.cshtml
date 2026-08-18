@@ -1,0 +1,360 @@
+﻿@model ArtGallery.ViewModels.RegisterViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Administrator Registration";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center align-items-center min-vh-100">
+
+            <div class="col-lg-5 col-md-8">
+
+                <div class="login-card">
+
+                    <div class="text-center mb-4">
+
+                        <i class="bi bi-shield-lock-fill display-4 text-warning"></i>
+
+                        <h2 class="mt-3">
+                            Administrator Registration
+                        </h2>
+
+                        <p>
+                            Create a secure administrator account for the Art Gallery Management System.
+                        </p>
+
+                    </div>
+
+                    <form asp-action="Register" method="post">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <!-- FULL NAME -->
+
+                        <div class="mb-3">
+
+                            <label asp-for="FullName"
+                                   class="form-label fw-semibold"></label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-person-fill"></i>
+                                </span>
+
+                                <input asp-for="FullName"
+                                       class="form-control"
+                                       placeholder="Enter your full name" />
+
+                            </div>
+
+                            <span asp-validation-for="FullName"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <!-- EMAIL -->
+
+                        <div class="mb-3">
+
+                            <label asp-for="Email"
+                                   class="form-label fw-semibold"></label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-envelope-fill"></i>
+                                </span>
+
+                                <input asp-for="Email"
+                                       class="form-control"
+                                       placeholder="Enter your email address" />
+
+                            </div>
+
+                            <span asp-validation-for="Email"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <!-- PASSWORD -->
+
+                        <div class="mb-2">
+
+                            <label asp-for="Password"
+                                   class="form-label fw-semibold"></label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-lock-fill"></i>
+                                </span>
+
+                                <input asp-for="Password"
+                                       id="adminPassword"
+                                       class="form-control"
+                                       placeholder="Create password"
+                                       onkeyup="checkPasswordStrength()" />
+
+                                <button type="button"
+                                        class="btn btn-outline-secondary"
+                                        onclick="togglePassword('adminPassword',this)">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                            <span asp-validation-for="Password"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <!-- PASSWORD STRENGTH -->
+
+                        <div class="mb-3">
+
+                            <div class="progress" style="height:8px;">
+
+                                <div id="passwordStrengthBar"
+                                     class="progress-bar"
+                                     style="width:0%">
+                                </div>
+
+                            </div>
+
+                            <small id="passwordStrengthText"
+                                   class="fw-semibold">
+                            </small>
+
+                        </div>
+
+                        <!-- REQUIREMENTS -->
+
+                        <div class="small mb-4">
+
+                            <div id="lengthCheck" class="text-danger">
+                                ✖ Minimum 8 characters
+                            </div>
+
+                            <div id="uppercaseCheck" class="text-danger">
+                                ✖ One uppercase letter
+                            </div>
+
+                            <div id="numberCheck" class="text-danger">
+                                ✖ One number
+                            </div>
+
+                        </div>
+
+                        <!-- CONFIRM PASSWORD -->
+
+                        <div class="mb-2">
+
+                            <label asp-for="ConfirmPassword"
+                                   class="form-label fw-semibold"></label>
+
+                            <div class="input-group">
+
+                                <span class="input-group-text">
+                                    <i class="bi bi-shield-lock-fill"></i>
+                                </span>
+
+                                <input asp-for="ConfirmPassword"
+                                       id="adminConfirmPassword"
+                                       class="form-control"
+                                       placeholder="Confirm password"
+                                       onkeyup="checkPasswordMatch()" />
+
+                                <button type="button"
+                                        class="btn btn-outline-secondary"
+                                        onclick="togglePassword('adminConfirmPassword',this)">
+
+                                    <i class="bi bi-eye"></i>
+
+                                </button>
+
+                            </div>
+
+                            <span asp-validation-for="ConfirmPassword"
+                                  class="text-danger"></span>
+
+                        </div>
+
+                        <small id="passwordMatch"
+                               class="fw-semibold"></small>
+
+                        <button class="btn btn-dark w-100 py-3 mt-4">
+
+                            <i class="bi bi-person-workspace"></i>
+
+                            Create Administrator
+
+                        </button>
+
+                    </form>
+
+                    <hr />
+
+                    <div class="text-center">
+
+                        Already have an administrator account?
+
+                        <a asp-controller="Admin"
+                           asp-action="Login"
+                           class="text-warning fw-bold">
+
+                            Login
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+    <script>
+
+        function togglePassword(id, btn) {
+
+            let input = document.getElementById(id);
+            let icon = btn.querySelector("i");
+
+            if (input.type === "password") {
+
+                input.type = "text";
+                icon.className = "bi bi-eye-slash";
+
+            }
+            else {
+
+                input.type = "password";
+                icon.className = "bi bi-eye";
+
+            }
+        }
+
+        function checkPasswordStrength() {
+
+            let password = document.getElementById("adminPassword").value;
+
+            let score = 0;
+
+            if (password.length >= 8) score++;
+            if (/[A-Z]/.test(password)) score++;
+            if (/[0-9]/.test(password)) score++;
+            if (/[^A-Za-z0-9]/.test(password)) score++;
+
+            let bar = document.getElementById("passwordStrengthBar");
+            let text = document.getElementById("passwordStrengthText");
+
+            if (score == 1) {
+
+                bar.style.width = "25%";
+                bar.className = "progress-bar bg-danger";
+                text.innerHTML = "Weak";
+
+            }
+            else if (score == 2) {
+
+                bar.style.width = "50%";
+                bar.className = "progress-bar bg-warning";
+                text.innerHTML = "Fair";
+
+            }
+            else if (score == 3) {
+
+                bar.style.width = "75%";
+                bar.className = "progress-bar bg-info";
+                text.innerHTML = "Good";
+
+            }
+            else if (score == 4) {
+
+                bar.style.width = "100%";
+                bar.className = "progress-bar bg-success";
+                text.innerHTML = "Strong";
+
+            }
+            else {
+
+                bar.style.width = "0%";
+                text.innerHTML = "";
+
+            }
+
+            updateCheck("lengthCheck", password.length >= 8);
+            updateCheck("uppercaseCheck", /[A-Z]/.test(password));
+            updateCheck("numberCheck", /[0-9]/.test(password));
+
+        }
+
+        function updateCheck(id, valid) {
+
+            let item = document.getElementById(id);
+
+            if (valid) {
+
+                item.className = "text-success";
+                item.innerHTML = item.innerHTML.replace("✖", "✔");
+
+            }
+            else {
+
+                item.className = "text-danger";
+                item.innerHTML = item.innerHTML.replace("✔", "✖");
+
+            }
+
+        }
+
+        function checkPasswordMatch() {
+
+            let p1 = document.getElementById("adminPassword").value;
+            let p2 = document.getElementById("adminConfirmPassword").value;
+
+            let msg = document.getElementById("passwordMatch");
+
+            if (p2 === "") {
+
+                msg.innerHTML = "";
+                return;
+
+            }
+
+            if (p1 === p2) {
+
+                msg.className = "text-success fw-semibold";
+                msg.innerHTML = "✔ Passwords match";
+
+            }
+            else {
+
+                msg.className = "text-danger fw-semibold";
+                msg.innerHTML = "✖ Passwords do not match";
+
+            }
+
+        }
+
+    </script>
+
+}

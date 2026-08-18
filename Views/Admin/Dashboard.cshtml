@@ -1,0 +1,188 @@
+﻿@model ArtGallery.ViewModels.DashboardViewModel
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Dashboard Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Welcome, @Context.Session.GetString("AdminName")
+            </h1>
+
+            <p>
+                Manage your Art Gallery from one place.
+            </p>
+
+        </div>
+
+        <!-- Statistics -->
+
+        <div class="row g-4 mb-5">
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-images display-4 text-primary mb-3"></i>
+
+                    <h4>Total Artworks</h4>
+
+                    <h2>@Model.TotalArtworks</h2>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-check-circle-fill display-4 text-success mb-3"></i>
+
+                    <h4>Available</h4>
+
+                    <h2>@Model.AvailableArtworks</h2>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-x-circle-fill display-4 text-danger mb-3"></i>
+
+                    <h4>Sold</h4>
+
+                    <h2>@Model.SoldArtworks</h2>
+
+                </div>
+
+            </div>
+
+            <div class="col-lg-3 col-md-6">
+
+                <div class="login-card text-center h-100">
+
+                    <i class="bi bi-tags-fill display-4 text-warning mb-3"></i>
+
+                    <h4>Categories</h4>
+
+                    <h2>@Model.TotalCategories</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+
+        <div class="login-card">
+
+            <h2 class="text-center mb-4">
+                Quick Actions
+            </h2>
+
+            <div class="row g-3">
+
+                <div class="col-md-4">
+
+                    <a asp-controller="Artwork"
+                       asp-action="Index"
+                       class="btn btn-dark w-100 py-3">
+
+                        <i class="bi bi-palette-fill me-2"></i>
+
+                        Manage Artworks
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a asp-controller="Category"
+                       asp-action="Index"
+                       class="btn btn-dark w-100 py-3">
+
+                        <i class="bi bi-folder-fill me-2"></i>
+
+                        Manage Categories
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a asp-controller="Order"
+                       asp-action="AdminIndex"
+                       class="btn btn-dark w-100 py-3">
+
+                        <i class="bi bi-receipt-cutoff me-2"></i>
+
+                        Manage Orders
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a asp-controller="Contact"
+                       asp-action="AdminIndex"
+                       class="btn btn-dark w-100 py-3">
+
+                        <i class="bi bi-envelope-fill me-2"></i>
+
+                        Manage Messages
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a asp-controller="Report"
+                       asp-action="Dashboard"
+                       class="btn btn-dark w-100 py-3">
+
+                        <i class="bi bi-bar-chart-fill me-2"></i>
+
+                        Reports
+
+                    </a>
+
+                </div>
+
+                <div class="col-md-4">
+
+                    <a asp-controller="Admin"
+                       asp-action="Logout"
+                       class="btn btn-danger w-100 py-3">
+
+                        <i class="bi bi-box-arrow-right me-2"></i>
+
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

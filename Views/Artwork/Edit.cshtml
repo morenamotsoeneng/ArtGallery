@@ -1,0 +1,237 @@
+﻿@model ArtGallery.ViewModels.ArtworkViewModel
+
+@{
+    ViewData["Title"] = "Edit Artwork";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-8">
+
+                <!-- Header -->
+
+                <div class="hero-content text-center mb-5">
+
+                    <h1>
+                        Edit Artwork
+                    </h1>
+
+                    <p>
+                        Update the artwork information below.
+                    </p>
+
+                </div>
+
+                <!-- Form -->
+
+                <div class="login-card">
+
+                    <form asp-action="Edit"
+                          asp-route-id="@ViewBag.ArtId"
+                          method="post"
+                          enctype="multipart/form-data">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="text-danger mb-3">
+                        </div>
+
+                        <!-- Title -->
+
+                        <div class="mb-3">
+
+                            <label asp-for="Title"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Title"
+                                   class="form-control"
+                                   placeholder="Artwork title" />
+
+                            <span asp-validation-for="Title"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Artist -->
+
+                        <div class="mb-3">
+
+                            <label asp-for="ArtistName"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="ArtistName"
+                                   class="form-control"
+                                   placeholder="Artist name" />
+
+                            <span asp-validation-for="ArtistName"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Category -->
+
+                        <div class="mb-3">
+
+                            <label asp-for="CategoryId"
+                                   class="form-label fw-semibold">
+                                Category
+                            </label>
+
+                            <select asp-for="CategoryId"
+                                    asp-items="ViewBag.CategoryId"
+                                    class="form-select">
+
+                                <option value="">
+                                    -- Select Category --
+                                </option>
+
+                            </select>
+
+                            <span asp-validation-for="CategoryId"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Price -->
+
+                        <div class="mb-3">
+
+                            <label asp-for="Price"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <input asp-for="Price"
+                                   class="form-control"
+                                   placeholder="Artwork price" />
+
+                            <span asp-validation-for="Price"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Description -->
+
+                        <div class="mb-3">
+
+                            <label asp-for="Description"
+                                   class="form-label fw-semibold">
+                            </label>
+
+                            <textarea asp-for="Description"
+                                      rows="5"
+                                      class="form-control"
+                                      placeholder="Artwork description">
+                            </textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Status -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="Status"
+                                   class="form-label fw-semibold">
+                                Status
+                            </label>
+
+                            <select asp-for="Status"
+                                    class="form-select">
+
+                                <option value="true">
+                                    Available
+                                </option>
+
+                                <option value="false">
+                                    Sold
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- Current Image -->
+
+                        <div class="mb-4 text-center">
+
+                            <label class="form-label fw-semibold d-block mb-3">
+                                Current Artwork Image
+                            </label>
+
+                            <img src="@ViewBag.OldImage"
+                                 class="img-fluid rounded shadow"
+                                 style="max-width:300px;" />
+
+                        </div>
+
+                        <!-- Upload -->
+
+                        <div class="mb-4">
+
+                            <label asp-for="ImageFile"
+                                   class="form-label fw-semibold">
+                                Replace Image (Optional)
+                            </label>
+
+                            <input asp-for="ImageFile"
+                                   type="file"
+                                   class="form-control" />
+
+                            <span asp-validation-for="ImageFile"
+                                  class="text-danger">
+                            </span>
+
+                        </div>
+
+                        <!-- Buttons -->
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-action="Index"
+                               class="btn btn-light px-4">
+
+                                <i class="bi bi-arrow-left-circle"></i>
+
+                                Cancel
+
+                            </a>
+
+                            <button type="submit"
+                                    class="btn btn-dark px-4">
+
+                                <i class="bi bi-check-circle-fill"></i>
+
+                                Update Artwork
+
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}

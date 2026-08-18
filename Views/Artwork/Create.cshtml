@@ -1,0 +1,245 @@
+﻿@model ArtGallery.ViewModels.ArtworkViewModel
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Add New Artwork";
+}
+
+<div class="form-page">
+
+    <div class="container py-5">
+
+        <div class="form-card">
+
+            <!-- Header -->
+
+            <div class="form-header text-center">
+
+                <h2>
+                    <i class="bi bi-brush-fill"></i>
+                    Add New Artwork
+                </h2>
+
+                <p>
+                    Complete the form below to add a new artwork to your gallery.
+                </p>
+
+            </div>
+
+            <!-- Body -->
+
+            <div class="form-body">
+
+                <form asp-action="Create"
+                      method="post"
+                      enctype="multipart/form-data">
+
+                    <div asp-validation-summary="ModelOnly"
+                         class="text-danger mb-4">
+                    </div>
+
+                    <!-- Title -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="Title" class="form-label fw-semibold">
+
+                            <i class="bi bi-brush"></i>
+
+                            Title
+
+                        </label>
+
+                        <input asp-for="Title"
+                               class="form-control"
+                               placeholder="Enter artwork title" />
+
+                        <span asp-validation-for="Title"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Artist -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="ArtistName" class="form-label fw-semibold">
+
+                            <i class="bi bi-person-fill"></i>
+
+                            Artist
+
+                        </label>
+
+                        <input asp-for="ArtistName"
+                               class="form-control"
+                               placeholder="Enter artist name" />
+
+                        <span asp-validation-for="ArtistName"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Category -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="CategoryId"
+                               class="form-label fw-semibold">
+
+                            <i class="bi bi-folder-fill"></i>
+
+                            Category
+
+                        </label>
+
+                        <select asp-for="CategoryId"
+                                asp-items="ViewBag.CategoryId"
+                                class="form-select">
+
+                            <option value="">
+                                Select Category
+                            </option>
+
+                        </select>
+
+                        <span asp-validation-for="CategoryId"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Price -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="Price"
+                               class="form-label fw-semibold">
+
+                            <i class="bi bi-currency-dollar"></i>
+
+                            Price
+
+                        </label>
+
+                        <input asp-for="Price"
+                               class="form-control"
+                               placeholder="Enter artwork price" />
+
+                        <span asp-validation-for="Price"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Description -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="Description"
+                               class="form-label fw-semibold">
+
+                            <i class="bi bi-card-text"></i>
+
+                            Description
+
+                        </label>
+
+                        <textarea asp-for="Description"
+                                  rows="5"
+                                  class="form-control"
+                                  placeholder="Describe the artwork"></textarea>
+
+                        <span asp-validation-for="Description"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Status -->
+
+                    <div class="mb-4">
+
+                        <label asp-for="Status"
+                               class="form-label fw-semibold">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Status
+
+                        </label>
+
+                        <select asp-for="Status"
+                                class="form-select">
+
+                            <option value="true">
+                                Available
+                            </option>
+
+                            <option value="false">
+                                Sold
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- Image -->
+
+                    <div class="mb-5">
+
+                        <label asp-for="ImageFile"
+                               class="form-label fw-semibold">
+
+                            <i class="bi bi-image-fill"></i>
+
+                            Artwork Image
+
+                        </label>
+
+                        <input asp-for="ImageFile"
+                               type="file"
+                               class="form-control" />
+
+                        <span asp-validation-for="ImageFile"
+                              class="text-danger"></span>
+
+                    </div>
+
+                    <!-- Buttons -->
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                        <a asp-action="Index"
+                           class="btn btn-dashboard-action">
+
+                            <i class="bi bi-arrow-left-circle"></i>
+
+                            Back
+
+                        </a>
+
+                        <button type="submit"
+                                class="btn btn-dashboard-action">
+
+                            <i class="bi bi-check-circle-fill"></i>
+
+                            Save Artwork
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+   

@@ -1,0 +1,193 @@
+﻿@model IEnumerable<ArtGallery.Models.ArtWork>
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Artworks";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Artwork Management
+            </h1>
+
+            <p>
+                Manage your gallery collection with ease.
+            </p>
+
+        </div>
+
+        <!-- Top Buttons -->
+
+        <div class="login-card mb-4">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                <a asp-controller="Admin"
+                   asp-action="Dashboard"
+                   class="btn btn-dark">
+
+                    <i class="bi bi-arrow-left-circle"></i>
+
+                    Dashboard
+
+                </a>
+
+                <a asp-action="Create"
+                   class="btn btn-dark">
+
+                    <i class="bi bi-plus-circle-fill"></i>
+
+                    Add Artwork
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Search -->
+
+        <div class="login-card mb-5">
+
+            <form asp-action="Index" method="get">
+
+                <div class="input-group">
+
+                    <input type="text"
+                           name="searchString"
+                           class="form-control"
+                           placeholder="Search artwork by title or artist..." />
+
+                    <button type="submit"
+                            class="btn btn-dark">
+
+                        <i class="bi bi-search"></i>
+
+                        Search
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="login-card h-100 p-0 overflow-hidden">
+
+                            <img src="@item.ImageURL"
+                                 class="img-fluid w-100 art-image"
+                                 alt="@item.Title" />
+
+                            <div class="p-4">
+
+                                <h3 class="mb-3">
+                                    @item.Title
+                                </h3>
+
+                                <p>
+                                    @item.Description
+                                </p>
+
+                                <hr />
+
+                                @if (item.Status)
+                                {
+                                    <span class="badge bg-success mb-3">
+                                        Available
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger mb-3">
+                                        Sold
+                                    </span>
+                                }
+
+                                <div class="d-grid gap-2 mt-3">
+
+                                    <a asp-action="Details"
+                                       asp-route-id="@item.ArtId"
+                                       class="btn btn-dark">
+
+                                        <i class="bi bi-eye-fill"></i>
+
+                                        Details
+
+                                    </a>
+
+                                    <a asp-action="Edit"
+                                       asp-route-id="@item.ArtId"
+                                       class="btn btn-warning text-white">
+
+                                        <i class="bi bi-pencil-square"></i>
+
+                                        Edit
+
+                                    </a>
+
+                                    <a asp-action="Delete"
+                                       asp-route-id="@item.ArtId"
+                                       class="btn btn-danger">
+
+                                        <i class="bi bi-trash-fill"></i>
+
+                                        Delete
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="login-card text-center">
+
+                <i class="bi bi-image display-1 text-primary"></i>
+
+                <h2 class="mt-4">
+                    No Artworks Found
+                </h2>
+
+                <p>
+                    Your gallery doesn't have any artworks yet.
+                </p>
+
+                <a asp-action="Create"
+                   class="btn btn-dark mt-3">
+
+                    <i class="bi bi-plus-circle-fill"></i>
+
+                    Add Your First Artwork
+
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+</section>

@@ -1,0 +1,183 @@
+﻿@model IEnumerable<ArtGallery.Models.CartItem>
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Checkout";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Checkout
+            </h1>
+
+            <p>
+                Review your selected artworks before completing your purchase.
+            </p>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-10">
+
+                <div class="login-card">
+
+                    @if (Model != null && Model.Any())
+                    {
+
+                        <div class="table-responsive">
+
+                            <table class="table details-table align-middle">
+
+                                <thead>
+
+                                    <tr>
+
+                                        <th>
+                                            Artwork
+                                        </th>
+
+                                        <th>
+                                            Artist
+                                        </th>
+
+                                        <th>
+                                            Price
+                                        </th>
+
+                                    </tr>
+
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+
+                                            <td>
+
+                                                <strong>
+                                                    @item.ArtWork?.Title
+                                                </strong>
+
+                                            </td>
+
+                                            <td>
+
+                                                @item.ArtWork?.ArtistName
+
+                                            </td>
+
+                                            <td class="fw-bold text-success">
+
+                                                R @item.ArtWork?.Price
+
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+                                <tfoot>
+
+                                    <tr>
+
+                                        <th colspan="2">
+
+                                            Total
+
+                                        </th>
+
+                                        <th class="text-success fs-5">
+
+                                            R @Model.Sum(x => x.ArtWork!.Price)
+
+                                        </th>
+
+                                    </tr>
+
+                                </tfoot>
+
+                            </table>
+
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mt-4">
+
+                            <a asp-controller="Cart"
+                               asp-action="Index"
+                               class="btn btn-dark">
+
+                                <i class="bi bi-arrow-left-circle"></i>
+
+                                Back to Cart
+
+                            </a>
+
+                            <form asp-action="CompletePurchase" method="post">
+
+                                <button type="submit"
+                                        class="btn btn-success">
+
+                                    <i class="bi bi-bag-check-fill"></i>
+
+                                    Complete Purchase
+
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    }
+                    else
+                    {
+
+                        <div class="text-center py-5">
+
+                            <i class="bi bi-cart-x display-1 text-primary"></i>
+
+                            <h2 class="mt-4">
+
+                                Your Cart is Empty
+
+                            </h2>
+
+                            <p>
+
+                                Add some beautiful artworks before checking out.
+
+                            </p>
+
+                            <a asp-controller="Gallery"
+                               asp-action="Index"
+                               class="btn btn-dark mt-3">
+
+                                <i class="bi bi-images"></i>
+
+                                Browse Gallery
+
+                            </a>
+
+                        </div>
+
+                    }
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

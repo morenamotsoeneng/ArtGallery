@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "Purchase Successful";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Purchase Successful
+            </h1>
+
+            <p>
+                Your order has been placed successfully.
+            </p>
+
+        </div>
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7">
+
+                <div class="login-card text-center">
+
+                    <i class="bi bi-check-circle-fill text-success"
+                       style="font-size:100px;"></i>
+
+                    <h2 class="mt-4 mb-3">
+
+                        Thank You!
+
+                    </h2>
+
+                    <p class="lead mb-4">
+
+                        Your purchase has been completed successfully.
+
+                    </p>
+
+                    <p class="text-muted mb-5">
+
+                        We appreciate your support. Your artwork purchase has been recorded and can now be viewed in your purchase history.
+
+                    </p>
+
+                    <div class="d-grid gap-3">
+
+                        <a asp-controller="Order"
+                           asp-action="Index"
+                           class="btn btn-dark">
+
+                            <i class="bi bi-bag-check-fill"></i>
+
+                            View Purchase History
+
+                        </a>
+
+                        <a asp-controller="Gallery"
+                           asp-action="Index"
+                           class="btn btn-dark">
+
+                            <i class="bi bi-images"></i>
+
+                            Continue Shopping
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

@@ -1,0 +1,188 @@
+﻿@model IEnumerable<ArtGallery.Models.Order>
+
+@{
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
+    ViewData["Title"] = "Manage Orders";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                Order Management
+            </h1>
+
+            <p>
+                View and manage customer orders.
+            </p>
+
+        </div>
+
+        <!-- Top Buttons -->
+
+        <div class="login-card mb-5">
+
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+
+                <a asp-controller="Admin"
+                   asp-action="Dashboard"
+                   class="btn btn-dark">
+
+                    <i class="bi bi-arrow-left-circle"></i>
+
+                    Dashboard
+
+                </a>
+
+            </div>
+
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var order in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+
+                        <div class="login-card h-100">
+
+                            <div class="text-center mb-4">
+
+                                <i class="bi bi-receipt-cutoff text-primary"
+                                   style="font-size:70px;"></i>
+
+                            </div>
+
+                            <h3 class="mb-3 text-center">
+
+                                Order #@order.OrderId
+
+                            </h3>
+
+                            <hr />
+
+                            <p>
+
+                                <strong>
+                                    <i class="bi bi-person-fill"></i>
+                                    Customer:
+                                </strong>
+
+                                @order.Customer?.FullName
+
+                            </p>
+
+                            <p>
+
+                                <strong>
+                                    <i class="bi bi-calendar-event"></i>
+                                    Date:
+                                </strong>
+
+                                @order.OrderDate.ToString("dd MMM yyyy")
+
+                            </p>
+
+                            <p>
+
+                                <strong>
+                                    <i class="bi bi-cash-stack"></i>
+                                    Total:
+                                </strong>
+
+                                R @order.TotalAmount
+
+                            </p>
+
+                            <div class="mb-4">
+
+                                <strong>
+                                    <i class="bi bi-check-circle-fill"></i>
+                                    Status:
+                                </strong>
+
+                                <br />
+
+                                @if (order.Status == "Completed")
+                                {
+                                    <span class="badge bg-success mt-2">
+                                        @order.Status
+                                    </span>
+                                }
+                                else if (order.Status == "Pending")
+                                {
+                                    <span class="badge bg-warning text-dark mt-2">
+                                        @order.Status
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-secondary mt-2">
+                                        @order.Status
+                                    </span>
+                                }
+
+                            </div>
+
+                            <div class="d-grid">
+
+                                <a asp-action="Details"
+                                   asp-route-id="@order.OrderId"
+                                   class="btn btn-dark">
+
+                                    <i class="bi bi-eye-fill"></i>
+
+                                    View Details
+
+                                </a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="login-card text-center">
+
+                <i class="bi bi-receipt-cutoff display-1 text-primary"></i>
+
+                <h2 class="mt-4">
+
+                    No Orders Found
+
+                </h2>
+
+                <p>
+
+                    There are currently no customer orders.
+
+                </p>
+
+                <a asp-controller="Admin"
+                   asp-action="Dashboard"
+                   class="btn btn-dark mt-3">
+
+                    <i class="bi bi-arrow-left-circle"></i>
+
+                    Back to Dashboard
+
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+</section>

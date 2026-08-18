@@ -1,0 +1,172 @@
+﻿@model IEnumerable<ArtGallery.Models.Favourite>
+
+@{
+    Layout = "~/Views/Customer/_CustomerLayout.cshtml";
+    ViewData["Title"] = "My Favourites";
+}
+
+<section class="hero-section">
+
+    <div class="container">
+
+        <!-- Header -->
+
+        <div class="hero-content text-center mb-5">
+
+            <h1>
+                My Favourite Artworks
+            </h1>
+
+            <p>
+                View and manage your saved artwork collection.
+            </p>
+
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+
+                @foreach (var item in Model)
+                {
+                    var artwork = item.ArtWork;
+
+                    if (artwork != null)
+                    {
+                        <div class="col-lg-4 col-md-6">
+
+                            <div class="login-card h-100 p-0 overflow-hidden">
+
+                                <!-- Artwork Image -->
+
+                                <img src="@artwork.ImageURL"
+                                     class="img-fluid w-100 art-image"
+                                     alt="@artwork.Title" />
+
+                                <div class="p-4">
+
+                                    <h3 class="mb-3">
+                                        @artwork.Title
+                                    </h3>
+
+                                    <p class="mb-2">
+                                        <strong>Artist:</strong>
+                                        @artwork.ArtistName
+                                    </p>
+
+                                    <p class="mb-2">
+                                        <strong>Category:</strong>
+                                        @(artwork.Category != null
+                                            ? artwork.Category.CategoryName
+                                            : "No Category")
+                                    </p>
+
+                                    <h4 class="text-success mb-3">
+                                        R @artwork.Price
+                                    </h4>
+
+                                    @if (artwork.Status)
+                                    {
+                                        <span class="badge bg-success mb-3">
+                                            Available
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger mb-3">
+                                            Sold
+                                        </span>
+                                    }
+
+                                    <hr />
+
+                                    <div class="d-grid gap-2 mt-3">
+
+                                        <a asp-controller="Gallery"
+                                           asp-action="Details"
+                                           asp-route-id="@artwork.ArtId"
+                                           class="btn btn-dark">
+
+                                            <i class="bi bi-eye-fill"></i>
+
+                                            View Details
+
+                                        </a>
+
+                                        @if (artwork.Status)
+                                        {
+                                            <a asp-controller="Cart"
+                                               asp-action="Add"
+                                               asp-route-id="@artwork.ArtId"
+                                               class="btn btn-success">
+
+                                                <i class="bi bi-cart-plus-fill"></i>
+
+                                                Add to Cart
+
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-secondary" disabled>
+
+                                                <i class="bi bi-x-circle-fill"></i>
+
+                                                Sold Out
+
+                                            </button>
+                                        }
+
+                                        <a asp-controller="Favourite"
+                                           asp-action="Remove"
+                                           asp-route-id="@item.FavouriteId"
+                                           class="btn btn-danger">
+
+                                            <i class="bi bi-heartbreak-fill"></i>
+
+                                            Remove Favourite
+
+                                        </a>
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    }
+                }
+
+            </div>
+        }
+        else
+        {
+            <div class="login-card text-center">
+
+                <i class="bi bi-heart display-1 text-danger"></i>
+
+                <h2 class="mt-4">
+                    No Favourite Artworks
+                </h2>
+
+                <p>
+                    Browse the gallery and save artworks you love.
+                </p>
+
+                <a asp-controller="Gallery"
+                   asp-action="Index"
+                   class="btn btn-dark mt-3">
+
+                    <i class="bi bi-images"></i>
+
+                    Browse Gallery
+
+                </a>
+
+            </div>
+        }
+
+    </div>
+
+</section>
